@@ -18,11 +18,78 @@ class Timesheet extends Component {
                     <button className="Logout">Logout</button>
                 </div>
                 <div className="Header">
-                    <h1 className="Timesheet-title">Timesheet</h1>
+                    <h1 className="Timesheet-title">Week of x/x/2018</h1>
                 </div>
                 <div>
-                    <p>Table here.</p>
-                    <p>This is a new area for the timesheet information.</p>
+                    <table>
+                        <tr>
+                            <th>Date</th>
+                            <th>Hours</th> 
+                            <th>Ticket</th>
+                            <th>Comments</th>
+                            <th>Billable</th>
+                            <th>Commands</th>
+                        </tr>
+                        <tr>
+                            <td>4/1/2016</td>
+                            <td>1.5</td> 
+                            <td>Acme: 1032</td>
+                            <td>Deploying build v20160401</td>
+                            <td>checkmark</td>
+                            <td>Edit Delete</td>
+                        </tr>
+                        <tr>
+                            <td>4/1/2016</td>
+                            <td>1</td> 
+                            <td>Acme: 1032</td>
+                            <td>Deploying build v20160401</td>
+                            <td>checkmark</td>
+                            <td>Edit Delete</td>
+                        </tr>
+                        <tr>
+                            <td>4/1/2016</td>
+                            <td>2</td> 
+                            <td>Acme: 1032</td>
+                            <td>Deploying build v20160401</td>
+                            <td>checkmark</td>
+                            <td>Edit Delete</td>
+                        </tr>
+                        <tr>
+                            <td>4/1/2016</td>
+                            <td>2</td> 
+                            <td>Acme: 1032</td>
+                            <td>Deploying build v20160401</td>
+                            <td>checkmark</td>
+                            <td>Edit Delete</td>
+                        </tr>
+                        <tr>
+                            <td>4/1/2016</td>
+                            <td>3</td> 
+                            <td>Acme: 1032</td>
+                            <td>Deploying build v20160401</td>
+                            <td>checkmark</td>
+                            <td>Edit Delete</td>
+                        </tr>
+                    </table>
+                    <p>Add Entry</p>
+                    <table>
+                        <tr>
+                            <th>Date</th>
+                            <th>Hours</th> 
+                            <th>Ticket</th>
+                            <th>Comments</th>
+                            <th>Billable</th>
+                            <th>Commands</th>
+                        </tr>
+                        <tr>
+                            <td>4/1/2016</td>
+                            <td>1.5</td> 
+                            <td>Acme: 1032</td>
+                            <td>Deploying build v20160401</td>
+                            <td>checkmark</td>
+                            <td>Add</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         );
