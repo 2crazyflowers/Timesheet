@@ -1,0 +1,19 @@
+.Home {
+    text-align: center;
+}
+
+.Home-title {
+    padding-top: 50px;
+    color: red;
+    font-weight: 900;
+    font-size: 5rem;
+}
+
+input.Login {
+    margin: 5px;
+}
+
+input.Button {
+    margin-left: 250px;
+}
+
