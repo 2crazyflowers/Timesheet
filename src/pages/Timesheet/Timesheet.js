@@ -13,6 +13,10 @@ class Timesheet extends Component {
     render() {
         return (
             <div className="Timesheet">
+                <div className="Navbar">
+                    <button className="ChangeWeek">Change Week</button>
+                    <button className="Logout">Logout</button>
+                </div>
                 <div className="Header">
                     <h1 className="Timesheet-title">Timesheet</h1>
                 </div>

@@ -31,3 +31,11 @@
   font-size: 20px;
   font-weight: bold;
 }
+
+button.Changeweek {
+  float: left;
+}
+
+button.Logout {
+  float: right;
+}

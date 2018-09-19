@@ -1,7 +1,26 @@
-.Timesheet {
+/* .Timesheet {
+    text-align: center;
+} */
+
+.Timesheet-title {
+    font-weight: 900;
+    font-size: 4rem;
+    text-align: center;
+    float: clear;
+    margin-top: 100px;
+    color: red;
+}
+
+p {
     text-align: center;
 }
 
-.Timesheet-title {
-    color: red;
+button.ChangeWeek {
+    margin: 10px 0 0 20px;
+}
+
+button.Logout {
+    float: right;
+    margin: 10px 20px 0 0;
+
 }
