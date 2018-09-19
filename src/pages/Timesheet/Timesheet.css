@@ -7,8 +7,10 @@
     color: red;
 }
 
-p {
+h3 {
+    font-weight: 900;
     text-align: center;
+    color: red;
 }
 
 button.ChangeWeek {
@@ -18,7 +20,10 @@ button.ChangeWeek {
 button.Logout {
     float: right;
     margin: 30px 100px 0 0;
+}
 
+.Table {
+    box-shadow: 10px 10px grey;
 }
 
 table {
@@ -31,7 +36,7 @@ table, th, td {
 }
 
 th, td {
-    padding: 10px;
+    padding: 5px 10px;
 }
 
 th {

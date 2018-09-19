@@ -7,7 +7,13 @@ class Timesheet extends Component {
 
     state = {
         user: "",
-        pass: ""
+        pass: "", 
+        date: "",
+        hours: "",
+        ticket: "",
+        comment: "",
+        billable: ""
+
     };
 
     render() {
@@ -21,7 +27,7 @@ class Timesheet extends Component {
                     <h1 className="Timesheet-title">Week of x/x/2018</h1>
                 </div>
                 <div>
-                    <table>
+                    <table className="Table">
                         <tr>
                             <th>Date</th>
                             <th>Hours</th> 
@@ -71,8 +77,8 @@ class Timesheet extends Component {
                             <td>Edit Delete</td>
                         </tr>
                     </table>
-                    <p>Add Entry</p>
-                    <table>
+                    <h3>Add Entry</h3>
+                    <table className="Table">
                         <tr>
                             <th>Date</th>
                             <th>Hours</th> 
