@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./Timesheet.css";
+import Checkbox from '@material-ui/core/Checkbox';
+
 
 
 
@@ -119,7 +121,7 @@ class Timesheet extends Component {
                             <td>1.5</td> 
                             <td>Acme: 1032</td>
                             <td>Deploying build v20160401</td>
-                            <td>checkmark</td>
+                            <td><Checkbox /></td>
                             <td>Add</td>
                         </tr>
                     </table>
