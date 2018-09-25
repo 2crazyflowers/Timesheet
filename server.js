@@ -1,17 +1,17 @@
-'use strict';
+// 'use strict';
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
 
 const app = express();
 
-const SELECT_ALL_ACTORS_QUERY = 'SELECT * FROM actors';
+const SELECT_ALL_DATES_QUERY = 'SELECT * FROM timesheet';
 
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
-    database: 'test'
+    database: 'rstimesheet'
 });
 
 //console.log(connection);
@@ -29,13 +29,13 @@ connection.connect(err => {
 app.use(cors());
 
 app.get('/', (req, res) => {
-    res.send('hello from the server. to get actors go to /actors');
+    res.send('hello from the server. to get timesheet information go to /timesheet');
 });
 
-app.get('/actors', (req, res) => {
-    connection.query(SELECT_ALL_ACTORS_QUERY, (err, results) => {
+app.get('/timesheet', (req, res) => {
+    connection.query(SELECT_ALL_DATES_QUERY, (err, results) => {
         if(err) {
-            console.log('there is an error getting the actors: ', err);
+            console.log('there is an error getting the dates information: ', err);
         } else {
             return res.json({
                 data: results
@@ -45,19 +45,25 @@ app.get('/actors', (req, res) => {
 });
 
 
-//this get is not adding the test to mysql
-//cannot get
-//gets the existing but not 
-app.get('/actors/add', (req, res) => {
-    const { name, movie, award } = req.query;
-    console.log(name, movie, award);
-    res.send('adding actor info');
-    // const INSERT_ACTOR_QUERY = 'INSERT INTO actors (name, movie, award) VALUES ($(name), $(movie), $(award))';
+//this get is not adding the browser line to mysql
+//it can grab name, movie and award from info added into brower line
+//and console log information
+//but also get error
+//localhost:4000/timesheet/add then add below
+//?name=Rock&movie=The Tooth Fairy&award=no
+//but some issue in query after VALUES
+app.get('/timesheet/add', (req, res) => {
+    const { date, hours, ticket, comments, billable } = req.query;
+    console.log(date, hours, ticket, comments, billable);
+    res.send('adding timesheet info');
+
+    //double quotes remove error on 1064, not getting value of name, movie or award when written like either "$(name)" or "${name}"
+    // const INSERT_ACTOR_QUERY = 'INSERT INTO actors (name, movie, award) VALUES('${name}', '${movie}', '${award}')';
     // connection.query(INSERT_ACTOR_QUERY, (err, results) => {
     //     if(err) {
-    //         console.log('there is an error getting the actors: ', err);
+    //         console.log('there is an error adding the actor: ', err);
     //     } else {
-    //         return res.send('you have successfully added an actor');
+    //         return res.json(results);
     //     }
     // });
 });
