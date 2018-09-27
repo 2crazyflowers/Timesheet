@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Timesheet.css";
 import Checkbox from '@material-ui/core/Checkbox';
+import SimpleTable from "../../components/Table";
 
 
 
@@ -34,7 +35,7 @@ class Timesheet extends Component {
     // <td key={id}>{billable}</td>
     // }
 
-    renderDate = ({id, date}) => <td key={id}>{date}</td>
+    // renderDate = ({id, date}) => <td key={id}>{date}</td>
 
 
     render() {
@@ -48,64 +49,8 @@ class Timesheet extends Component {
                 <div className="Header">
                     <h1 className="Timesheet-title">Week of x/x/2018</h1>
                 </div>
+                <SimpleTable />
                 <div>
-                    
-                </div>
-
-                <div>
-                    <table className="Table">
-                        <tr>
-                            <th>Date</th>
-                            <th>Hours</th> 
-                            <th>Ticket</th>
-                            <th>Comments</th>
-                            <th>Billable</th>
-                            <th>Commands</th>
-                        </tr>
-                        <tr>
-                            {timesheet.map(this.renderDate)}
-                        </tr>
-                        {/* <tr>
-                            <td>4/1/2016</td>
-                            <td>1.5</td> 
-                            <td>Acme: 1032</td>
-                            <td>Deploying build v20160401</td>
-                            <td>checkmark</td>
-                            <td>Edit Delete</td>
-                        </tr>
-                        <tr>
-                            <td>4/1/2016</td>
-                            <td>1</td> 
-                            <td>Acme: 1032</td>
-                            <td>Deploying build v20160401</td>
-                            <td>checkmark</td>
-                            <td>Edit Delete</td>
-                        </tr>
-                        <tr>
-                            <td>4/1/2016</td>
-                            <td>2</td> 
-                            <td>Acme: 1032</td>
-                            <td>Deploying build v20160401</td>
-                            <td>checkmark</td>
-                            <td>Edit Delete</td>
-                        </tr>
-                        <tr>
-                            <td>4/1/2016</td>
-                            <td>2</td> 
-                            <td>Acme: 1032</td>
-                            <td>Deploying build v20160401</td>
-                            <td>checkmark</td>
-                            <td>Edit Delete</td>
-                        </tr>
-                        <tr>
-                            <td>4/1/2016</td>
-                            <td>3</td> 
-                            <td>Acme: 1032</td>
-                            <td>Deploying build v20160401</td>
-                            <td>checkmark</td>
-                            <td>Edit Delete</td>
-                        </tr> */}
-                    </table>
                     <h3>Add Entry</h3>
                     <table className="Table">
                         <tr>
