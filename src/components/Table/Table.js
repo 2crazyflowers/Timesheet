@@ -6,14 +6,33 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
     table: {
         width: '80%',
         boxShadow: '10px 10px grey',
     },
+    tableheader: {
+        fontSize: '16px',
+        fontWeight: 'bold',
+        padding: '5px',
+        textAlign: 'left',
+    },
+    tabledata: {
+        padding: '6px',        
+        textAlign: 'left',
+
+    },
+    checkbox: {
+        outline: 'none',
+    },
+    button: {
+        fontSize: '10px',
+        padding: '2px',
+        margin: '2px',
+    }
 });
 
 let id = 0;
@@ -37,31 +56,39 @@ function SimpleTable(props) {
         <Table className={classes.table}>
             <TableHead>
                 <TableRow>
-                    <TableCell numeric>Date</TableCell>
-                    <TableCell numeric>Hours</TableCell>
-                    <TableCell>Ticket</TableCell>
-                    <TableCell>Comments</TableCell>
-                    <TableCell>Billable</TableCell>
+                    <TableCell className={classes.tableheader}numeric>Date</TableCell>
+                    <TableCell  className={classes.tableheader}numeric>Hours</TableCell>
+                    <TableCell className={classes.tableheader}>Ticket</TableCell>
+                    <TableCell className={classes.tableheader}>Comments</TableCell>
+                    <TableCell className={classes.tableheader}>Billable</TableCell>
+                    <TableCell className={classes.tableheader}>Commands</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
                 {rows.map(row => {
                 return (
                     <TableRow key={row.id}>
-                        <TableCell component="th" scope="row" numeric>
+                        <TableCell component="th" scope="row" numeric className={classes.tabledata}>
                             {row.date}
                         </TableCell>
-                        <TableCell numeric>{row.hours}</TableCell>
-                        <TableCell numeric>{row.ticket}</TableCell>
-                        <TableCell numeric>{row.comment}</TableCell>
-                        <TableCell>
+                        <TableCell numeric className={classes.tabledata}>{row.hours}</TableCell>
+                        <TableCell numeric className={classes.tabledata}>{row.ticket}</TableCell>
+                        <TableCell numeric className={classes.tabledata}>{row.comment}</TableCell>
+                        <TableCell className={classes.tabledata}>
                             <Checkbox
                                 checked={row.billable}
                                 // onChange={this.handleChange('checkedB')}
                                 value="checked"
-                                color="primary"
                                 // onChange={onSelectAllClick}
                             />
+                        </TableCell>
+                        <TableCell className={classes.tabledata}>
+                            <Button variant="contained" className={classes.button}>
+                                Edit
+                            </Button>
+                            <Button variant="contained" className={classes.button}>
+                                Delete
+                            </Button>
                         </TableCell>
                     </TableRow>
                 );
