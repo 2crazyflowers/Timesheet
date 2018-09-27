@@ -10,27 +10,23 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 
 const styles = theme => ({
-    root: {
-        width: '100%',
-        marginTop: theme.spacing.unit * 3,
-        overflowX: 'auto',
-    },
     table: {
-        minWidth: 700,
+        width: '80%',
+        boxShadow: '10px 10px grey',
     },
 });
 
 let id = 0;
-function createData(date, hours, ticket, comments, billable) {
+function createData(date, hours, ticket, comment, billable) {
     id += 1;
-    return { id, date, hours, ticket, comments, billable };
+    return { id, date, hours, ticket, comment, billable };
 }
 
 const rows = [
     createData(20160401, 1.5, 'Acme: 1032', 'Deploy building v20160401', true),
     createData(20160401, 1, 'Acme: 1022', 'Debugging API format issue', true),
     createData(20160401, 2, 'ADMIN', 'Fixing laptop :(', false),
-    createData(20160401, 2, 'licing up design for micro site', true),
+    createData(20160401, 2, 'AceCo: 1092','slicing up design for micro site', true),
 ];
 
 
@@ -38,7 +34,6 @@ function SimpleTable(props) {
     const { classes } = props;
 
     return (
-    <Paper className={classes.root}>
         <Table className={classes.table}>
             <TableHead>
                 <TableRow>
@@ -59,7 +54,7 @@ function SimpleTable(props) {
                         <TableCell numeric>{row.hours}</TableCell>
                         <TableCell numeric>{row.ticket}</TableCell>
                         <TableCell numeric>{row.comment}</TableCell>
-                        <TableCell padding="checkbox">
+                        <TableCell>
                             <Checkbox
                                 checked={row.billable}
                                 // onChange={this.handleChange('checkedB')}
@@ -73,7 +68,6 @@ function SimpleTable(props) {
             })}
         </TableBody>
         </Table>
-    </Paper>
     );
 }
 

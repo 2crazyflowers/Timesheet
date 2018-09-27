@@ -27,17 +27,6 @@ class Timesheet extends Component {
 
     }
 
-    // renderEntry = ({id, date, hours, ticket, comment, billable}) => {
-    // <td key={id}>{date}</td>
-    // <td key={id}>{hours}</td>
-    // <td key={id}>{ticket}</td>
-    // <td key={id}>{comment}</td>
-    // <td key={id}>{billable}</td>
-    // }
-
-    // renderDate = ({id, date}) => <td key={id}>{date}</td>
-
-
     render() {
         const { timesheet } = this.state;
         return (
