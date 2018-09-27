@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import { TextField } from '@material-ui/core';
 
 const styles = theme => ({
     table: {
@@ -23,6 +24,10 @@ const styles = theme => ({
     tabledata: {
         padding: '6px',        
         textAlign: 'left',
+    },
+    textField: {
+        margin: '2px',
+        fontSize: '10px',
 
     },
     button: {
@@ -41,18 +46,26 @@ function TimeEntry(props) {
         <Table className={classes.table}>
             <TableHead>
                 <TableRow>
-                    <TableCell className={classes.tableheader}numeric>Date</TableCell>
+                    <TableCell className={classes.tableheader}
+                    numeric>Date</TableCell>
                     <TableCell  className={classes.tableheader}numeric>Hours</TableCell>
                     <TableCell className={classes.tableheader}>Ticket</TableCell>
                     <TableCell className={classes.tableheader}>Comments</TableCell>
                     <TableCell className={classes.tableheader}>Billable</TableCell>
-                    <TableCell className={classes.tableheader}>Commands</TableCell>
+                    <TableCell className={classes.tableheader}>Command</TableCell>
                 </TableRow>
             </TableHead>
             <TableBody>
                 <TableRow >
-                    <TableCell component="th" scope="row" numeric className={classes.tabledata}></TableCell>
-                    <TableCell numeric className={classes.tabledata}></TableCell>
+                    <TableCell component="th" scope="row" numeric className={classes.tabledata}>
+                        <TextField
+                            type="date"
+                            defaultValue="2017-05-24"
+                            className={classes.textField}
+                        />    
+                    </TableCell>
+                    <TableCell numeric 
+                    className={classes.tabledata}></TableCell>
                     <TableCell numeric className={classes.tabledata}></TableCell>
                     <TableCell numeric className={classes.tabledata}></TableCell>
                     <TableCell className={classes.tabledata}>
