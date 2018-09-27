@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./Timesheet.css";
 import Checkbox from '@material-ui/core/Checkbox';
-import SimpleTable from "../../components/Table";
+import TimeRendered from "../../components/Table";
+import TimeEntry from "../../components/TimeEntry";
 
 
 
@@ -38,28 +39,12 @@ class Timesheet extends Component {
                 <div className="Header">
                     <h1 className="Timesheet-title">Week of x/x/2018</h1>
                 </div>
-                <SimpleTable />
+                <TimeRendered />
                 <div>
+                    <br></br>
                     <h3>Add Entry</h3>
-                    <table className="Table">
-                        <tr>
-                            <th>Date</th>
-                            <th>Hours</th> 
-                            <th>Ticket</th>
-                            <th>Comments</th>
-                            <th>Billable</th>
-                            <th>Commands</th>
-                        </tr>
-                        <tr>
-                            <td>4/1/2016</td>
-                            <td>1.5</td> 
-                            <td>Acme: 1032</td>
-                            <td>Deploying build v20160401</td>
-                            <td><Checkbox /></td>
-                            <td>Add</td>
-                        </tr>
-                    </table>
                 </div>
+                <TimeEntry />>
             </div>
         );
     }

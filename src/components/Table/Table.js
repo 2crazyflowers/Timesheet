@@ -25,13 +25,11 @@ const styles = theme => ({
         textAlign: 'left',
 
     },
-    checkbox: {
-        outline: 'none',
-    },
     button: {
         fontSize: '10px',
         padding: '2px',
         margin: '2px',
+        marginLeft: '4px',
     }
 });
 
@@ -49,7 +47,7 @@ const rows = [
 ];
 
 
-function SimpleTable(props) {
+function TimeRendered(props) {
     const { classes } = props;
 
     return (
@@ -98,8 +96,8 @@ function SimpleTable(props) {
     );
 }
 
-SimpleTable.propTypes = {
+TimeRendered.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SimpleTable);
+export default withStyles(styles)(TimeRendered);
