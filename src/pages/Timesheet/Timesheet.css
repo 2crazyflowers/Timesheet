@@ -3,11 +3,13 @@
     font-size: 4rem;
     text-align: center;
     float: clear;
-    margin-top: 100px;
+    margin-top: 0;
+    margin-bottom: 10px;
     color: red;
 }
 
 h3 {
+    margin-top: 5px;
     font-weight: 900;
     text-align: center;
     color: red;

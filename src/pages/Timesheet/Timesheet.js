@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./Timesheet.css";
-import Checkbox from '@material-ui/core/Checkbox';
 import TimeRendered from "../../components/Table";
 import TimeEntry from "../../components/TimeEntry";
 
@@ -29,7 +28,7 @@ class Timesheet extends Component {
     }
 
     render() {
-        const { timesheet } = this.state;
+        //const { timesheet } = this.state;
         return (
             <div className="Timesheet">
                 <div className="Navbar">

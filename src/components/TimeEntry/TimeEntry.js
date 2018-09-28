@@ -28,11 +28,14 @@ const styles = theme => ({
     textField: {
         margin: '2px',
         fontSize: '10px',
-
+        width: '135px',
+        paddingRight: '2px',
     },
-    button: {
+    commands: {
         fontSize: '10px',
-        padding: '2px',
+        padding: '0',
+        borderRadius: '1px',
+        border: '1px solid black',
         margin: '2px',
         marginLeft: '4px',
     }
@@ -77,7 +80,7 @@ function TimeEntry(props) {
                         />
                     </TableCell>
                     <TableCell className={classes.tabledata}>
-                        <Button variant="contained" className={classes.button}>
+                        <Button variant="contained" className={classes.commands}>
                             Add
                         </Button>
                     </TableCell>

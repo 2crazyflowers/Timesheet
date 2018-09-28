@@ -25,9 +25,11 @@ const styles = theme => ({
         textAlign: 'left',
 
     },
-    button: {
+    commands: {
         fontSize: '10px',
-        padding: '2px',
+        padding: '0',
+        borderRadius: '1px',
+        border: '1px solid black',
         margin: '2px',
         marginLeft: '4px',
     }
@@ -81,10 +83,10 @@ function TimeRendered(props) {
                             />
                         </TableCell>
                         <TableCell className={classes.tabledata}>
-                            <Button variant="contained" className={classes.button}>
+                            <Button variant="contained" className={classes.commands}>
                                 Edit
                             </Button>
-                            <Button variant="contained" className={classes.button}>
+                            <Button variant="contained" className={classes.commands}>
                                 Delete
                             </Button>
                         </TableCell>
