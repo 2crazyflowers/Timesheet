@@ -7,6 +7,8 @@ const app = express();
 
 const SELECT_ALL_DATES_QUERY = 'SELECT * FROM timesheet';
 
+const SELECT_ALL_TICKETS_QUERY = 'SELECT * FROM tickets';
+
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -28,12 +30,32 @@ connection.connect(err => {
 
 app.use(cors());
 
+// USER AUTH REQUIREMENTS:
+// const passport = require('./passport');
+
+// // Yes, the app uses express.
+// const app = express();
+
 app.get('/', (req, res) => {
     res.send('hello from the server. to get timesheet information go to /timesheet');
 });
 
+//grab time entries
 app.get('/timesheet', (req, res) => {
     connection.query(SELECT_ALL_DATES_QUERY, (err, results) => {
+        if(err) {
+            console.log('there is an error getting the dates information: ', err);
+        } else {
+            return res.json({
+                data: results
+            })
+        }
+    });
+});
+
+//grab tickets
+app.get('/tickets', (req, res) => {
+    connection.query(SELECT_ALL_TICKETS_QUERY, (err, results) => {
         if(err) {
             console.log('there is an error getting the dates information: ', err);
         } else {

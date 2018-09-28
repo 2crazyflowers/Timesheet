@@ -9,11 +9,16 @@ import TimeEntry from "../../components/TimeEntry";
 class Timesheet extends Component {
 
     state = {
-        timesheet: []
+        timesheet: [],
+        tickets: [],
     };
 
     componentDidMount() {
         this.getTimesheet();
+    }
+
+    componentDidMount() {
+        this.getTickets();
     }
 
     getTimesheet = _ => {
@@ -24,7 +29,16 @@ class Timesheet extends Component {
             // })
             .then(response => this.setState({ timesheet: response.data }))
             .catch(err => console.log(err))
+    }
 
+    getTickets = _ => {
+        fetch('http://localhost:4000/tickets')
+            .then(response => response.json())
+            .then(({ data }) => {
+                console.log(data)
+            })
+            .then(response => this.setState({ tickets: response.data }))
+            .catch(err => console.log(err))
     }
 
     render() {
