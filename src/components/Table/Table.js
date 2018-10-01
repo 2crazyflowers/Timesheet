@@ -89,7 +89,8 @@ class TimeRendered extends React.Component {
                                 {row.date}
                             </TableCell>
                             <TableCell numeric className={classes.tabledata}>{row.hours}</TableCell>
-                            <TableCell numeric className={classes.tabledata}>        <TextField 
+                            <TableCell 
+                            numeric className={classes.tabledata}>        <TextField 
                                 id='ticket'
                                 select
                                 InputLabelProps={{
@@ -101,7 +102,7 @@ class TimeRendered extends React.Component {
                                 SelectProps={{ name: 'value'}} 
                                 margin="normal">
                                     {tickets.map(ticket => {
-                                    return <MenuItem value={ticket.ticket_code}>:  {ticket.client}</MenuItem>;
+                                    return <MenuItem value={ticket.ticket_code}>:  {ticket.client_name}</MenuItem>;
                                     })}
                                 </TextField>
                             </TableCell>

@@ -1,14 +1,16 @@
 // 'use strict';
 const express = require('express');
+const bodyParser = require("body-parser");
 const cors = require('cors');
 const mysql = require('mysql');
-
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+// var users = require('./routes/users');
+// const User = require("./models/userModel");
 const app = express();
 
-const SELECT_ALL_DATES_QUERY = 'SELECT * FROM timesheet';
 
-const SELECT_ALL_TICKETS_QUERY = 'SELECT * FROM tickets';
-
+// mysql connection
 const connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -18,23 +20,54 @@ const connection = mysql.createConnection({
 
 //console.log(connection);
 
-// was having problems with connection and error: Error: ER_NOT_SUPPORTED_AUTH_MODE: Client does not support authentication protocol
-// requested by server; consider upgrading MySQL client
-// found on stackoverflow this query to run in mysql workbench:
-// ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'
+const SELECT_ALL_DATES_QUERY = 'SELECT * FROM timesheet';
+const SELECT_ALL_TICKETS_QUERY = 'SELECT * FROM tickets';
+
 connection.connect(err => {
     if(err) {
         console.log('There is an error connecting mysql: ', err);
     }
 });
 
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
+
+// Passport Config
+// These parameters takes property and value
+// app.use(require("express-session")({
+//     secret: "this is our secret sentence",
+//     resave: false,
+//     saveUninitalized: false
+// }));
+
+// app.use(passport.initialize());
+// app.use(passport.session());
+// passport.use(new LocalStrategy(User.authenticate()));
+
+// // below is from documentation
+// passport.serializeUser(function(user, done) {
+//     done(null, user.id);
+// });
+// //this resolved issue with user not going to database
+// passport.deserializeUser(function(id, done) {
+//     User.findById(id, function (err, user) {
+//         done(err, user);
+//     });
+// });
+
+// // Share current user with routes
+// app.use(function(req, res, next){
+//     res.locals.currentUser = req.user;
+//     next();
+// });
+
+// //Route Used
+// app.use(userRoutes);
+
 app.use(cors());
-
-// USER AUTH REQUIREMENTS:
-// const passport = require('./passport');
-
-// // Yes, the app uses express.
-// const app = express();
 
 app.get('/', (req, res) => {
     res.send('hello from the server. to get timesheet information go to /timesheet');
