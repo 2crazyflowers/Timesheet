@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Timesheet.css";
-import TimeRendered from "../../components/Table";
-import TimeEntry from "../../components/TimeEntry";
+import TimeRendered from "./TimeRendered";
+import TimeEntry from "./TimeEntry";
 
 
 
@@ -11,7 +11,15 @@ class Timesheet extends Component {
     state = {
         timesheet: [],
         tickets: [],
+        date: '',
+        hour: '',
+        ticket: '',
+        comment: '',
+        billable: '',
+        error: '',
     };
+
+    //all of the functions are rendered on this main page
 
     // when the components mounts, load all timesheet and ticket info and save them to this.state.timesheet and this.state.tickets
     componentDidMount() {
@@ -20,7 +28,7 @@ class Timesheet extends Component {
     }
 
     // loads all timesheet info and saves them to this.state.timesheet
-    getTimesheet = _ => {
+    getTimesheet = () => {
         fetch('http://localhost:4000/timesheet')
             .then(response => response.json())
             .then(({ data }) => {
@@ -31,7 +39,7 @@ class Timesheet extends Component {
     }
 
     // loads all tickets and saves them to this.state.tickets
-    getTickets = _ => {
+    getTickets = () => {
         fetch('http://localhost:4000/tickets')
             .then(response => response.json())
             .then(({ data }) => {
@@ -41,8 +49,54 @@ class Timesheet extends Component {
             .catch(err => console.log('There is an error setting the state of tickets', err))
     }
 
+    // STILL NEED TO ADD FUNCTIONS FOR:
+    // adding/creating time entry
+    handleDateChange = (event) => {
+        this.setState({ date: event.target.value });
+    }
+
+    handleHourChange = (event) => {
+        this.setState({ hour: event.target.value });
+    }
+
+    handleTicketChange = (event) => {
+        this.setState({ ticket: event.target.value });
+    }
+
+    handleCommentChange = (event) => {
+        this.setState({ comment: event.target.value});
+    }
+
+    handleBillableChange = (event) => {
+        this.setState({ billable: event.target.value});
+    }
+
+    handleEntrySubmit = (event) => {
+        event.preventDefault();
+        console.log("Adding new time entry");
+        console.log("this.state.date: ", this.state.date);
+        console.log("this.state.hour: ", this.state.hour);
+        console.log("this.state.ticket: ", this.state.ticket);
+        console.log("this.state.comment: ", this.state.comment);
+        console.log("this.state.billable: ", this.state.billable);
+        // TimesheetAPI.saveTimesheet({
+        //     date: this.state.date,
+        //     hour: this.state.hour,
+        //     ticket: this.state.ticket,
+        //     comment: this.state.comment,
+        //     billable: this.state.billable,
+        // })
+        //     .then(res => this.getTimesheet())
+        //     .catch(err => console.log('there is an error in saving the new time entry', err));
+    }
+
+
+    // editing time rendered
+
+    // deleting time rendered
+
     render() {
-        // const { timesheet, tickets } = this.state;
+        const { classes } = this.props;
 
         return (
             <div className="Timesheet">
@@ -61,7 +115,14 @@ class Timesheet extends Component {
                     <br></br>
                     <h3>Add Entry</h3>
                 </div>
-                <TimeEntry />>
+                <TimeEntry 
+                tickets={this.state.tickets}
+                handleEntrySubmit = {this.handleEntrySubmit}
+                handleDateChange = {this.handleDateChange}
+                handleHourChange = {this.handleHourChange}
+                handleTicketChange = {this.handleTicketChange}
+                handleCommentChange = {this.handleCommentChange}
+                handleBillableChange = {this.handleBillableChange} />
             </div>
         );
     }

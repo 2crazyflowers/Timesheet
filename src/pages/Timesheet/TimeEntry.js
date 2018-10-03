@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-// import MenuItem from '@material-ui/core/MenuItem';
+import MenuItem from '@material-ui/core/MenuItem';
 import { Input } from '@material-ui/core';
 
 const styles = theme => ({
@@ -47,12 +47,12 @@ const styles = theme => ({
 class TimeEntry extends React.Component {
 // function TimeEntry(props) {
     
-    handleTicketMenuOption = event => {
+    handleTickeDropdown = event => {
         this.setState({ [event.target.name]: event.target.value });
         event.preventDefault();
         //not grabbing this information from timesheet.js
         console.log('The ticket information from Table.js is: ', event.target.value);
-        this.props.handleTicketMenuOption(event);
+        this.props.handleTicketChange(event);
     }
     
     state = {
@@ -81,16 +81,25 @@ class TimeEntry extends React.Component {
                     <TableRow >
                         <TableCell component="th" scope="row" numeric className={classes.tabledata}>
                             <TextField
-                                type="date"
-                                defaultValue="2017-05-24"
-                                className={classes.textField}
+                            id="date"
+                            type="date"
+                            defaultValue="2017-05-24"
+                            value={this.props.handleDate}
+                            onChange={this.props.handleDateChange}
+                            className={classes.textField}
                             />    
                         </TableCell>
                         <TableCell numeric 
-                        className={classes.tabledata}><Input></Input></TableCell>
+                        className={classes.tabledata}>
+                            <Input
+                            id="hour"
+                            value={this.props.handleHour}
+                            onChange={this.props.handleHourChange}
+                            />
+                        </TableCell>
                         <TableCell 
                         numeric className={classes.tabledata}>
-                            {/* <TextField 
+                            <TextField 
                             id='ticket'
                             select
                             InputLabelProps={{
@@ -98,26 +107,31 @@ class TimeEntry extends React.Component {
                             }}
                             className={classes.textField} 
                             value={this.state.value}
-                            onChange={this.handleTicketMenuOption} 
+                            onChange={this.handleTicketDropdown} 
                             SelectProps={{ name: 'value'}} 
                             margin="normal">
                                 {tickets.map(ticket => {
                                 return <MenuItem value={ticket.ticket_code}>:  {ticket.client_name}</MenuItem>;
                                 })}
-                            </TextField> */}
+                            </TextField>
                         </TableCell>
                         <TableCell numeric className={classes.tabledata}>
-                        <Input></Input></TableCell>
-                        <TableCell className={classes.tabledata}>
-                            <Checkbox
-                                //checked={row.billable}
-                                // onChange={this.handleChange('checkedB')}
-                                value="checked"
-                                // onChange={onSelectAllClick}
+                            <Input
+                            id="comment"
+                            value={this.props.handleComment}
+                            onChange={this.props.handleCommentChange}
                             />
                         </TableCell>
                         <TableCell className={classes.tabledata}>
-                            <Button variant="contained" className={classes.commands}>
+                            <Checkbox
+                            id="billable"
+                            onChange={this.props.handleBillableChange}
+                            value="checked"
+                            />
+                        </TableCell>
+                        <TableCell className={classes.tabledata}>
+                            <Button variant="contained" className={classes.commands}
+                            onClick={this.props.handleEntrySubmit}>
                                 Add
                             </Button>
                         </TableCell>
@@ -127,9 +141,5 @@ class TimeEntry extends React.Component {
         );
     }
 }
-
-// TimeEntry.propTypes = {
-//     classes: PropTypes.object.isRequired,
-// };
 
 export default withStyles(styles)(TimeEntry);

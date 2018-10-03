@@ -51,14 +51,13 @@ const rows = [
 ];
 
 class TimeRendered extends React.Component {
-// function TimeRendered(props) {
 
-    handleTicketMenuOption = event => {
+    handleTickeDropdown = event => {
         this.setState({ [event.target.name]: event.target.value });
         event.preventDefault();
         //not grabbing this information from timesheet.js
         console.log('The ticket information from Table.js is: ', event.target.value);
-        this.props.handleTicketMenuOption(event);
+        this.props.handleTickeChange(event);
     }
     
     state = {
@@ -98,7 +97,7 @@ class TimeRendered extends React.Component {
                                 }}
                                 className={classes.textField} 
                                 value={this.state.value}
-                                onChange={this.handleTicketMenuOption} 
+                                onChange={this.handleTicketDropdown} 
                                 SelectProps={{ name: 'value'}} 
                                 margin="normal">
                                     {tickets.map(ticket => {
@@ -110,9 +109,8 @@ class TimeRendered extends React.Component {
                             <TableCell className={classes.tabledata}>
                                 <Checkbox
                                     checked={row.billable}
-                                    // onChange={this.handleChange('checkedB')}
+                                    // onChange={this.props.handleBillableChange('checked')}
                                     value="checked"
-                                    // onChange={onSelectAllClick}
                                 />
                             </TableCell>
                             <TableCell className={classes.tabledata}>
@@ -131,9 +129,5 @@ class TimeRendered extends React.Component {
         );
     }
 }
-
-// TimeRendered.propTypes = {
-//     classes: PropTypes.object.isRequired,
-// };
 
 export default withStyles(styles)(TimeRendered);
