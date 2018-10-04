@@ -30,12 +30,13 @@ class Timesheet extends Component {
     // loads all timesheet info and saves them to this.state.timesheet
     getTimesheet = () => {
         fetch('http://localhost:4000/timesheet')
-            .then(response => response.json())
-            .then(({ data }) => {
-                console.log(data)
-            })
+            // .then(response => response.json())
+            // .then(({ data }) => {
+            //     console.log(data)
+            // })
             .then(response => this.setState({ timesheet: response.data }))
-            .catch(err => console.log(err))
+            .then(console.log('this is the timesheet info from state: ', this.state.timesheet))
+            .catch(err => console.log('there is an error with getTimesheet function: ', err))
     }
 
     // loads all tickets and saves them to this.state.tickets

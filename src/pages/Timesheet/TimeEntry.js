@@ -45,13 +45,12 @@ const styles = theme => ({
 
 
 class TimeEntry extends React.Component {
-// function TimeEntry(props) {
     
     handleTickeDropdown = event => {
         this.setState({ [event.target.name]: event.target.value });
         event.preventDefault();
         //not grabbing this information from timesheet.js
-        console.log('The ticket information from Table.js is: ', event.target.value);
+        console.log('The ticket information from Table.js is: ', this.state.tickets);
         this.props.handleTicketChange(event);
     }
 
@@ -60,9 +59,10 @@ class TimeEntry extends React.Component {
     }
 
     render() {
-        const { classes, tickets, billable } = this.props;
+        const { classes, tickets } = this.props;
 
-        console.log('The ticket information is being send into our table: ', tickets);
+        // tickets are still not being listed properly
+        console.log('The ticket information is in TimeEntry.js is: ', tickets);
         
         return (
             <Table className={classes.table}>
@@ -111,7 +111,7 @@ class TimeEntry extends React.Component {
                             SelectProps={{ name: 'value'}} 
                             margin="normal">
                                 {tickets.map(ticket => {
-                                return <MenuItem value={ticket.ticket_code}>:  {ticket.client_name}</MenuItem>;
+                                return <MenuItem value={ticket.ticket_code}>: {ticket.client_name}</MenuItem>;
                                 })}
                             </TextField>
                         </TableCell>
@@ -127,13 +127,7 @@ class TimeEntry extends React.Component {
                             id="billable"
                             value={this.billable}
                             onChange={this.props.handleBillableChange}
-                            // value="checked"
-                            />
-                            {/* <Checkbox
-                            id="billable"
-                            checked={this.state.checked}
-                            onChange={this.handleChange('checked')}          value="checked"
-                            /> */}
+                           />
                         </TableCell>
                         <TableCell className={classes.tabledata}>
                             <Button variant="contained" className={classes.commands}
