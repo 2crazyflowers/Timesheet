@@ -30,10 +30,10 @@ class Timesheet extends Component {
     // loads all timesheet info and saves them to this.state.timesheet
     getTimesheet = () => {
         fetch('http://localhost:4000/timesheet')
-            // .then(response => response.json())
-            // .then(({ data }) => {
-            //     console.log(data)
-            // })
+            .then(response => response.json())
+            .then(({ data }) => {
+                console.log('this is the timesheet/data from timesheet.js', data)
+            })
             .then(response => this.setState({ timesheet: response.data }))
             .then(console.log('this is the timesheet info from state: ', this.state.timesheet))
             .catch(err => console.log('there is an error with getTimesheet function: ', err))
@@ -108,7 +108,7 @@ class Timesheet extends Component {
     // deleting time rendered
 
     render() {
-        const { classes } = this.props;
+        // const { classes } = this.props;
 
         return (
             <div className="Timesheet">

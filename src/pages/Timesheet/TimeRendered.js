@@ -100,7 +100,7 @@ class TimeRendered extends React.Component {
                                 onChange={this.handleTicketDropdown} 
                                 SelectProps={{ name: 'value'}} 
                                 margin="normal">
-                                    {ticketInfo.map(ticket => {
+                                    {tickets.map(ticket => {
                                     return <MenuItem value={ticket.ticket_code}>:  {ticket.client_name}</MenuItem>;
                                     })}
                                 </TextField>

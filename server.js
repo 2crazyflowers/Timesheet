@@ -22,6 +22,7 @@ const connection = mysql.createConnection({
 
 const SELECT_ALL_DATES_QUERY = 'SELECT * FROM timesheet';
 const SELECT_ALL_TICKETS_QUERY = 'SELECT * FROM tickets';
+const SELECT_ALL_USERS_QUERY = 'SELECT * FROM users';
 
 connection.connect(err => {
     if(err) {
@@ -98,6 +99,19 @@ app.get('/tickets', (req, res) => {
         }
     });
 });
+
+//grab users
+app.get('/users', (req, res) => {
+    connection.query(SELECT_ALL_USERS_QUERY, (err, results) => {
+        if(err) {
+            console.log('there is an error getting users info: ', err);
+        } else {
+            return res.json({
+                data: results
+            })
+        }
+    })
+})
 
 
 //this get is not adding the browser line to mysql
