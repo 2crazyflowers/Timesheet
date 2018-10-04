@@ -54,13 +54,13 @@ class TimeEntry extends React.Component {
         console.log('The ticket information from Table.js is: ', event.target.value);
         this.props.handleTicketChange(event);
     }
-    
+
     state = {
         value: '',
     }
 
     render() {
-        const { classes, tickets } = this.props;
+        const { classes, tickets, billable } = this.props;
 
         console.log('The ticket information is being send into our table: ', tickets);
         
@@ -125,9 +125,15 @@ class TimeEntry extends React.Component {
                         <TableCell className={classes.tabledata}>
                             <Checkbox
                             id="billable"
+                            value={this.billable}
                             onChange={this.props.handleBillableChange}
-                            value="checked"
+                            // value="checked"
                             />
+                            {/* <Checkbox
+                            id="billable"
+                            checked={this.state.checked}
+                            onChange={this.handleChange('checked')}          value="checked"
+                            /> */}
                         </TableCell>
                         <TableCell className={classes.tabledata}>
                             <Button variant="contained" className={classes.commands}

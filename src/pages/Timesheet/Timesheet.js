@@ -15,7 +15,7 @@ class Timesheet extends Component {
         hour: '',
         ticket: '',
         comment: '',
-        billable: '',
+        billable: false,
         error: '',
     };
 
@@ -68,7 +68,18 @@ class Timesheet extends Component {
     }
 
     handleBillableChange = (event) => {
-        this.setState({ billable: event.target.value});
+        // console.log('before the change the box value was: ', this.state.billable);
+        // change billable: 'checked' to true
+        // and billable: 'unchecked' to false
+        if (this.state.billable === true) {
+            this.setState({ billable: false});
+            console.log('the checkbox has been set to false');
+        }
+        else {
+            this.setState({ billable: true});
+            console.log('the checkbox has been set to true');
+        }
+        // console.log('the box is: ',this.state.billable);
     }
 
     handleEntrySubmit = (event) => {
