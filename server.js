@@ -3,13 +3,14 @@ const express = require('express');
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const mysql = require('mysql');
+const expressSession = require('express-session');
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 // var users = require('./routes/users');
 // const User = require("./models/userModel");
 const app = express();
 
-
+//MySQL 
 // mysql connection
 const connection = mysql.createConnection({
     host: 'localhost',
@@ -17,9 +18,9 @@ const connection = mysql.createConnection({
     password: '',
     database: 'rstimesheet'
 });
-
 //console.log(connection);
 
+// mysql queries
 const SELECT_ALL_DATES_QUERY = 'SELECT * FROM timesheet';
 const SELECT_ALL_TICKETS_QUERY = 'SELECT * FROM tickets';
 const SELECT_ALL_USERS_QUERY = 'SELECT * FROM users';
@@ -71,14 +72,14 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.get('/', (req, res) => {
-    res.send('hello from the server. to get timesheet information go to /timesheet');
+    // res.send('hello from the server. to get timesheet information go to /timesheet');
 });
 
 //grab time entries
 app.get('/timesheet', (req, res) => {
     connection.query(SELECT_ALL_DATES_QUERY, (err, results) => {
         if(err) {
-            console.log('there is an error getting the dates information: ', err);
+            console.log('there is an error getting the dates information from server.js: ', err);
         } else {
             return res.json({
                 data: results
@@ -91,7 +92,7 @@ app.get('/timesheet', (req, res) => {
 app.get('/tickets', (req, res) => {
     connection.query(SELECT_ALL_TICKETS_QUERY, (err, results) => {
         if(err) {
-            console.log('there is an error getting the dates information: ', err);
+            console.log('there is an error getting the dates information from server.js: ', err);
         } else {
             return res.json({
                 data: results
@@ -104,14 +105,24 @@ app.get('/tickets', (req, res) => {
 app.get('/users', (req, res) => {
     connection.query(SELECT_ALL_USERS_QUERY, (err, results) => {
         if(err) {
-            console.log('there is an error getting users info: ', err);
+            console.log('there is an error getting users info from server.js: ', err);
         } else {
             return res.json({
                 data: results
             })
         }
-    })
-})
+    });
+});
+
+// add time entry
+
+
+// delete time
+
+
+// edit time
+
+
 
 
 //this get is not adding the browser line to mysql
