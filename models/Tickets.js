@@ -2,28 +2,28 @@
 var Sequelize = require('sequelize');
 
 // Model for storing tickets.
-module.exports = function(sequelize, DataTypes) {
+module.exports = function(sequelize) {
     var Ticket = sequelize.define('Ticket', {
         id: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
             primaryKey: true
         },
         client_name: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
         },
         ticket_code: {
-            type: DataTypes.INTEGER,
+            type: Sequelize.INTEGER,
             allowNull: false,
         },
         // createdAt: {
-        //     type: DataTypes.DATE,
+        //     type: Sequelize.DATE,
         //     allowNull: false,
         //     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
         // },
         // updatedAt: {
-        //     type: DataTypes.DATE,
+        //     type: Sequelize.DATE,
         //     allowNull: false,
         //     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
         // },

@@ -2,28 +2,36 @@
 var Sequelize = require('sequelize');
 
 // Model for storing users.
-module.exports = function(sequelize, DataTypes) {
+module.exports = function(sequelize) {
     var TimeEntry = sequelize.define('TimeEntry', {
         id: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
             primaryKey: true
         },
-        client_name: {
-            type: DataTypes.STRING,
+        date: {
+            type: Sequelize.DATE,
             allowNull: false,
         },
-        ticket_code: {
-            type: DataTypes.INTEGER,
+        hour: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+        },
+        ticket: {
+            type: Sequelize.STRING,
+            allowNull: false,
+        },
+        comment: {
+            type: Sequelize.STRING,
             allowNull: false,
         },
         // createdAt: {
-        //     type: DataTypes.DATE,
+        //     type: Sequelize.DATE,
         //     allowNull: false,
         //     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
         // },
         // updatedAt: {
-        //     type: DataTypes.DATE,
+        //     type: Sequelize.DATE,
         //     allowNull: false,
         //     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
         // },
@@ -34,6 +42,6 @@ module.exports = function(sequelize, DataTypes) {
             }
         }
     });
-    });
+
     return TimeEntry;
 };
