@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import LoginForm from "./LoginForm";
 import "./Home.css";
+import axios from 'axios';
+
 
 class Home extends Component {
 
@@ -8,7 +10,6 @@ class Home extends Component {
         users: [],
         username: "",
         password: "",
-        // credentials: [],
     };
 
     componentDidMount() {
@@ -16,15 +17,9 @@ class Home extends Component {
     }
 
     getUsers = () => {
-        fetch('http://localhost:4000/users')
+        fetch('http://localhost:4000/api/users')
         .then(response => response.json())
-        //this is working
-        // .then(({ data }) => {
-        //     console.log('the users/data info from home.js: ', data)
-        // })
         .then(response => this.setState({ users: response.data }))
-        // .then(users => console.log(this.state.users))
-        //this is not
         .catch(err => console.log('there is an error with getUsers: ', err))
     }
 
@@ -43,26 +38,36 @@ class Home extends Component {
         event.preventDefault();
         console.log('username: ', this.state.username);
         console.log('password: ', this.state.password);
+        const { setUser } = this.props;
+        setUser("i am the user")
+        axios.post('/Auth/login', { username: this.state.username, password: this.state.password})
+            .then((res) => {
+                console.log(res.data);
+                setUser(res.data.userId)
+                // history.push('/home')
+            })
+            .catch(err => console.log('this is a login error: ', err))     
     }
-
-
+    
     render() {
+        const { setUser } = this.props;
 
         return (
             <div className="Home">
                 <div>
                     <h1 className="Home-title">RS/Timesheet</h1>
-                    <ul>
+                    {/* <ul>
+                        Grabbing the user as a test, as wasn't getting the information before. Then showing it to make sure it is working and it is.
                         {this.state.users.map(user => 
-                        <li>
+                        <li key={user.id}>
                             <p>{user.username}</p>
                             <p>{user.password}</p>
                         </li>)}
-                    </ul>
+                    </ul> */}
                 </div>
                 <div>
                     <LoginForm
-                    users={this.state.users}
+                    // users={this.state.users}
                     handleUserSubmit = {this.handleUserSubmit}
                     handleUsernameChange = {this.handleUsernameChange}
                     handlePasswordChange = {this.handlePasswordChange}

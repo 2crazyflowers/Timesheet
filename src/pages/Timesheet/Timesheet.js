@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import "./Timesheet.css";
 import TimeRendered from "./TimeRendered";
 import TimeEntry from "./TimeEntry";
-
-
-
+import TimeEntryAPI from "../../utils/TimeEntryAPi";
+import TicketsAPI from "../../utils/TicketsAPI";
 
 class Timesheet extends Component {
-
     state = {
-        timesheet: [],
+        timeentries: [],
         tickets: [],
         date: '',
         hour: '',
@@ -21,33 +19,24 @@ class Timesheet extends Component {
 
     //all of the functions are rendered on this main page
 
-    // when the components mounts, load all timesheet and ticket info and save them to this.state.timesheet and this.state.tickets
+    // when the components mounts, load all time entries and ticket info and save them to this.state.timeentries and this.state.tickets
     componentDidMount() {
-        this.getTimesheet();
-        this.getTickets();
+        this.loadTimeentries();
+        this.loadTickets();
     }
 
-    // loads all timesheet info and saves them to this.state.timesheet
-    getTimesheet = () => {
-        fetch('http://localhost:4000/timesheet')
-            .then(response => response.json())
-            .then(({ data }) => {
-                console.log('this is the timesheet/data from timesheet.js', data)
-            })
-            .then(response => this.setState({ timesheet: response.data }))
-            .then(console.log('this is the timesheet info from state: ', this.state.timesheet))
-            .catch(err => console.log('there is an error with getTimesheet function: ', err))
+    // loads all time entries and saves them to this.state.timeentries
+    loadTimeentries = () => {
+        TimeEntryAPI.getTimeEntries()
+            .then(res => this.setState({ timeentries: res.data }))
+            .then(console.log('the time entries found: ', this.state.timeentries))
+            .catch(err => console.log('getting time entries did not work: ', err));
     }
-
     // loads all tickets and saves them to this.state.tickets
-    getTickets = () => {
-        fetch('http://localhost:4000/tickets')
-            .then(response => response.json())
-            .then(({ data }) => {
-                console.log('The ticket information from Timesheet.js: ', data)
-            })
-            .then(response => this.setState({ tickets: response.data }))
-            .catch(err => console.log('There is an error setting the state of tickets', err))
+    loadTickets = () => {
+        TicketsAPI.getTickets()
+        .then(res => this.setState({ tickets: res.data }))
+        .catch(err => console.log('getting tickets did not work: ', err));
     }
 
     // STILL NEED TO ADD FUNCTIONS FOR:
@@ -83,7 +72,7 @@ class Timesheet extends Component {
         // console.log('the box is: ',this.state.billable);
     }
 
-    handleEntrySubmit = (event) => {
+    handleTimeEntrySubmit = (event) => {
         event.preventDefault();
         console.log("Adding new time entry");
         console.log("this.state.date: ", this.state.date);
@@ -91,21 +80,27 @@ class Timesheet extends Component {
         console.log("this.state.ticket: ", this.state.ticket);
         console.log("this.state.comment: ", this.state.comment);
         console.log("this.state.billable: ", this.state.billable);
-        // TimesheetAPI.saveTimesheet({
-        //     date: this.state.date,
-        //     hour: this.state.hour,
-        //     ticket: this.state.ticket,
-        //     comment: this.state.comment,
-        //     billable: this.state.billable,
-        // })
-        //     .then(res => this.getTimesheet())
-        //     .catch(err => console.log('there is an error in saving the new time entry', err));
+        TimeEntryAPI.saveTimeEntry({
+            date: this.state.date,
+            hour: this.state.hour,
+            ticket: this.state.ticket,
+            comment: this.state.comment,
+            billable: this.state.billable,
+        })
+            .then(res => this.getTimesheet())
+            .catch(err => console.log('there is an error in saving the new time entry', err));
     }
 
+    // Deletes a time entry from the database with a given id, then reloads timeentries from the database
+    deleteTimeEntry = id => {
+        TimeEntryAPI.deleteTimeEntry(id)
+            .then(res => this.loadTimeentries())
+            .catch(err => console.log('there is an error reloading the timeentries after a deleting an entry: ', err));
+    };
+    
+    // editing time entry
+    //TimeEntryAPI
 
-    // editing time rendered
-
-    // deleting time rendered
 
     render() {
         // const { classes } = this.props;
@@ -120,7 +115,7 @@ class Timesheet extends Component {
                     <h1 className="Timesheet-title">Week of x/x/2018</h1>
                 </div>
                 <TimeRendered 
-                timesheet={this.state.timesheet}
+                timeentries={this.state.timeentries}
                 tickets={this.state.tickets}
                 />
                 <div>

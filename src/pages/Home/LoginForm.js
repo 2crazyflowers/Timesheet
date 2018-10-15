@@ -9,7 +9,7 @@ class LoginForm extends Component {
 
 
   render() {
-    // const { users } = this.props;
+    //const { users } = this.props;
     return (
       <div>
         <form>
@@ -23,6 +23,7 @@ class LoginForm extends Component {
           value={this.props.username}
           onChange={this.props.handleUsernameChange}/>
           </label>
+          <p component="p">{this.props.usernameMissingError}</p>
           <br></br>
           <label>
           Pass
@@ -35,6 +36,7 @@ class LoginForm extends Component {
           onChange={this.props.handlePasswordChange}
           />
           </label>
+          <p component="p">{this.props.usernameMissingError}</p>
           <br></br>
           <input type="submit" value="Login" className="Button"
           onClick={this.props.handleUserSubmit}/>

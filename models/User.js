@@ -3,38 +3,41 @@ var Sequelize = require('sequelize');
 
 
 // Model for storing users.
-module.exports = function(sequelize) {
+module.exports = (sequelize, Sequelize) => {
     var User = sequelize.define('User', {
         id: {
             type: Sequelize.INTEGER,
-            allowNull: false,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
         },
         createdAt: {
             type: Sequelize.DATE,
             allowNull: false,
-            defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+            // defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
         },
-        // updatedAt: {
-        //     type: DataTypes.DATE,
-        //     allowNull: false,
-        //     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-        // },
+        updatedAt: {
+            type: Sequelize.DATE,
+            allowNull: false,
+            // defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
+        },
         username: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING(32),
             allowNull: false,
         },
         password: {
-            type: Sequelize.STRING,
+            type: Sequelize.STRING(32),
             allowNull: false,
         }
     }, {
         classMethods: {
             associate: function (models) {
-                User.hasMany(models.TimeEntry, {foreignKey: 'id', allowNull: false});
+                User.hasMany(models.TimeEntry, {foreignKey: 'userId', allowNull: false});
             }
         }
     });
+
+    // create seeds as needed
+    // User.create({ id: 1, createdAt: Date.now(), username: 'test', password: 'testing' })
+    
     return User;
 };

@@ -1,38 +1,28 @@
-// var express     =  require('express'),
-//     passport    =  require("passport"),
-//     User        =  require("./models/User"),   
-//     router      =  express.Router();
+var express     =  require('express'),
+    passport    =  require("passport"),
+    User        =  require("./models/User"),   
+    router      =  express.Router();
 
 
-// // Routes for administrator: signup, signin, signout
-// // Below are HTTP methods. Routes for webpages, getting the static files
-// //route for signin page
-// router.get("/signin", function (req, res) {
-//     res.render('signIn');
-// });
+// Routes for user: login, logout, timeentries
+// Below are HTTP methods. Routes for webpages, getting the static files
+//route for login page
+router.get("/", function (req, res) {
+    res.render('/');
+});
 
-// router.post("/signin", passport.authenticate("local",
-//     {
-//     successRedirect: "/",
-//     failureRedirect: "/signin"
-//     }), function(req, res){ 
-// });
+router.post("/", passport.authenticate("local",
+    {
+    successRedirect: "/timeentries",
+    failureRedirect: "/"
+    }), function(req, res){ 
+});
 
-// //route for signout page
-// router.get("/signout", function (req, res) {
-//     req.logOut();
-//     res.redirect("/");
-// });
-
-// //route for signup page
-// router.get("/signup", isLoggedIn, function (req, res) {
-//     res.render('signUp');
-// });
-
-// router.post("/signup", isLoggedIn, function (req, res) {
-//     //console.log(req.body) - add name to input in form for user/password
-//     console.log('Current username: ' + req.body.username);
-//     console.log('Current password: ' + req.body.password);
+//route for logout page
+router.get("/logout", function (req, res) {
+    req.logOut();
+    res.redirect("/");
+});
 
 //     // Create a new user using req.body to test if saving user to database working
 //     // without using passport etc. just simple connection
@@ -67,14 +57,14 @@
     
 // });
 
-// function isLoggedIn(req, res, next) {
-//     //console.log('You think you are logged in, but are you?');
-//     if(req.isAuthenticated()) {
-//         console.log('You are still logged in');
-//         return next();
-//     }
-//     res.redirect('/signin');
-// };
+function isLoggedIn(req, res, next) {
+    //console.log('You think you are logged in, but are you?');
+    if(req.isAuthenticated()) {
+        console.log('You are still logged in');
+        return next();
+    }
+    res.redirect('/login');
+};
 
 
-// module.exports  = router;
+module.exports  = router;

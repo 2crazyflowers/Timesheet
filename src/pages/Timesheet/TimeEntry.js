@@ -127,7 +127,7 @@ class TimeEntry extends React.Component {
                             id="billable"
                             value={this.billable}
                             onChange={this.props.handleBillableChange}
-                           />
+                        />
                         </TableCell>
                         <TableCell className={classes.tabledata}>
                             <Button variant="contained" className={classes.commands}
